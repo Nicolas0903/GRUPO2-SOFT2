@@ -48,7 +48,7 @@ const LoginPage = () => {
         >
           Registro Usuario
         </Button>
-        <Button 
+        <Button
           variant="outlined" 
           color="secondary" 
           style={{ marginTop: '10px' }}
