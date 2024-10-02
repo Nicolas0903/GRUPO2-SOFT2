@@ -2,15 +2,40 @@
 body {
     margin: 0;
     padding: 0;
-  }
+}
   
-  .container {
+.ContenedorPrincipal {
     background-image: url('../../images/carretera.jpg');
     background-size: cover;
     background-position: center;
-    height: 100vh; 
+    background-repeat: no-repeat; 
+    height: 100vh;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
   }
   
+.Titulo {
+    font-size: 48px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 100px;
+  }
+
+.Formulario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.TextField {
+    width: 100%;
+    margin-top: 10px;
+}

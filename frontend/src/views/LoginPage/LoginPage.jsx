@@ -1,6 +1,6 @@
 import './Login.css';
 import React, { useState } from 'react';
-import { Container, TextField, Button, CssBaseline, Typography } from '@mui/material';
+import { Container, TextField, Button, Typography } from '@mui/material';
 
 const LoginPage = () => {
 
@@ -9,19 +9,18 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para manejar el inicio de sesión
     console.log('Email:', email);
     console.log('Password:', password);
   };
 
-    return (
-      <Container component="main" maxWidth="xs" style={{ marginTop: '100px' }}>
-      <CssBaseline />
-      <Typography component="h1" variant="h5">
-        Sistema de Control de Emociones
+  return (
+    <Container className="ContenedorPrincipal" maxWidth="xs">
+      <Typography variant="h5" className="Titulo" fontSize={"38px"}>
+        <b>Sistema de Control <br /> Emociones</b>
       </Typography>
-      <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
+      <form onSubmit={handleSubmit} className="Formulario">
         <TextField
+          className="TextField"
           variant="outlined"
           margin="normal"
           required
@@ -31,6 +30,7 @@ const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
+          className="TextField"
           variant="outlined"
           margin="normal"
           required
@@ -40,26 +40,25 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button 
-            variant="outlined" 
-            color="secondary" 
-            style={{ marginTop: '10px' }}
-            onClick={""} // Llama a la función de registro
+        <Button
+          className="Button"
+          variant="outlined"
+          color="secondary"
+          onClick={""}
         >
           Registro Usuario
         </Button>
         <Button
-          variant="outlined" 
-          color="secondary" 
-          style={{ marginTop: '10px' }}
-          onClick={""} // Llama a la función de registro
+          className="Button"
+          variant="outlined"
+          color="secondary"
+          type="submit"
         >
           Iniciar
         </Button>
       </form>
     </Container>
-    );
-
+  );
 };
 
 export default LoginPage;
