@@ -1,12 +1,12 @@
-import './Login.css';
-
+import '../LoginPage/LoginPage.css';
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; 
 
 const LoginPage = () => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,9 +14,17 @@ const LoginPage = () => {
     console.log('Password:', password);
   };
 
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
+  const handleLogin = () => {
+    navigate('/inicio');
+  };
+
   return (
-    <Container className="ContenedorPrincipal" maxWidth="xs">
-      <Typography variant="h5" className="Titulo" fontSize={"38px"}>
+    <Container className="ContenedorPrincipalLogin" maxWidth="xs">
+      <Typography variant="h5" className="TituloLogin" fontSize={"38px"}>
         <b>Sistema de Control <br /> Emociones</b>
       </Typography>
       <form onSubmit={handleSubmit} className="Formulario">
@@ -41,11 +49,11 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="Contenedor-Boton">
-          <Button className="Boton" variant="outlined">
+        <div className="ContenedorLogin-Boton">
+          <Button className="LoginBoton" variant="outlined" onClick={handleRegister}>
             Registro Usuario
           </Button>
-          <Button className="Boton" variant="outlined">
+          <Button className="LoginBoton" variant="outlined" onClick={handleLogin}>
             Iniciar
           </Button>
         </div>

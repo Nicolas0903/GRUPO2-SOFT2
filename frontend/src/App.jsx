@@ -1,26 +1,22 @@
-// Importaciones necesarias de React y react-router-dom
 import React from 'react';
-import { createHashRouter, Route, RouterProvider } from 'react-router-dom';
-
-// Importaciones de tus vistas o componentes
-import LoginPage from "./views/LoginPage/LoginPage";
-//import RegisterPage from "./Views/Register/RegisterPage";
-import InicioPage from "./views/InicioPage/InicioPage";
-// Página en caso de error
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ErrorPage from './views/ErrorPage/ErrorPage';
+import LoginPage from './views/LoginPage/LoginPage';
+import RegisterPage from './views/RegisterPage/RegisterPage'; 
+import InicioPage from './views/InicioPage/InicioPage';
 
-// Creación del enrutador utilizando createHashRouter
-const router = createHashRouter([
-    { path: "/", element: <LoginPage /> },
-    //{ path: "/registro", element: <RegisterPage /> },
-    { path: "/inicio", element: <InicioPage /> },
-    { path: "*", element: <ErrorPage /> },
-]);
-
-// Componente principal de la aplicación
 const App = () => {
-    //return <RouterProvider router={router} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<ErrorPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/inicio" element={<InicioPage />} />
+      </Routes>
+    </Router>
+  );
 };
 
-// Exportación del componente App
 export default App;
+

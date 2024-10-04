@@ -4,7 +4,7 @@ body {
     padding: 0;
 }
   
-.ContenedorPrincipal {
+.ContenedorPrincipalLogin {
     background-image: url('../../images/carretera.jpg');
     background-size: cover;
     background-position: center;
@@ -16,8 +16,8 @@ body {
     border-radius: 10px;
   }
   
-.Titulo {
-    font-size: 48px;
+.TituloLogin {
+    font-size: 40px;
     color: white;
     text-align: center;
     position: absolute;
@@ -38,7 +38,7 @@ body {
   
   .TextField .MuiInputLabel-root.Mui-focused {
       color: black;
-      background-color: white; /* Fondo blanco solo cuando está enfocado */
+      background-color: white; 
   }
   
   .TextField .MuiOutlinedInput-notchedOutline {
@@ -54,12 +54,12 @@ body {
   }
 }
 
-.Contenedor-Boton {
+.ContenedorLogin-Boton {
     padding-top: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .Boton {
+    .LoginBoton {
         margin-left: 20px;
         background-color: white; 
         color: black;
@@ -74,4 +74,3 @@ body {
         display: inline-block;
     }
 }
-
