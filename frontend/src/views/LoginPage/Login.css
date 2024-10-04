@@ -13,7 +13,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
     border-radius: 10px;
   }
   
@@ -29,13 +28,50 @@ body {
   }
 
 .Formulario {
-    width: 100%;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-  }
 
-.TextField {
-    width: 100%;
-    margin-top: 10px;
+  .TextField .MuiInputLabel-root {
+      color: white;
+      transition: background-color 0.3s ease;
+      padding: 0 4px;
+  }
+  
+  .TextField .MuiInputLabel-root.Mui-focused {
+      color: black;
+      background-color: white; /* Fondo blanco solo cuando está enfocado */
+  }
+  
+  .TextField .MuiOutlinedInput-notchedOutline {
+      border-color: white;
+  }
+  
+  .TextField .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+      border-color: white;
+  }
+  
+  .TextField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: white;
+  }
 }
+
+.Contenedor-Boton {
+    padding-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Boton {
+        margin-left: 20px;
+        background-color: white; 
+        color: black;
+        border: 2px solid white; 
+        border-radius: 30px;
+        padding: 10px 25px;
+        margin: 0 10px; 
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+    }
+}
+

@@ -1,4 +1,5 @@
 import './Login.css';
+
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 
@@ -25,7 +26,7 @@ const LoginPage = () => {
           margin="normal"
           required
           fullWidth
-          label="Email"
+          label="Usuario o Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -40,22 +41,14 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button
-          className="Button"
-          variant="outlined"
-          color="secondary"
-          onClick={""}
-        >
-          Registro Usuario
-        </Button>
-        <Button
-          className="Button"
-          variant="outlined"
-          color="secondary"
-          type="submit"
-        >
-          Iniciar
-        </Button>
+        <div className="Contenedor-Boton">
+          <Button className="Boton" variant="outlined">
+            Registro Usuario
+          </Button>
+          <Button className="Boton" variant="outlined">
+            Iniciar
+          </Button>
+        </div>
       </form>
     </Container>
   );
