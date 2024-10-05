@@ -25,7 +25,7 @@ const LoginPage = () => {
   };
 
   const handleRegister = () => {
-    navigate('/register');
+    navigate('/register1');
   };
 
   return (

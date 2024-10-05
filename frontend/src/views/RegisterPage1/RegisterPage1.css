@@ -1,0 +1,37 @@
+.ContenedorPrincipalRegistro {
+    background-image: url('../../images/carretera.jpg'); /* Ruta a la imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    height: 100vh; /* Altura completa de la ventana */
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    border-radius: 10px;
+  }
+  
+  .TituloRegistro {
+    margin-bottom: 20px;
+    color: white; /* Cambia el color del texto del título */
+  }
+  
+  .FormularioRegistro {
+    width: 100%; /* Para que los campos ocupen el ancho completo */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con algo de transparencia */
+    border-radius: 8px; /* Bordes redondeados para el formulario */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .TextField {
+    margin-bottom: 20px; /* Espaciado entre los campos */
+  }
+  
+  .ContenedorRegistro-Boton {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .RegistrarBoton {
+    width: 100%; /* Botón ocupa el ancho completo */
+  }
+  
