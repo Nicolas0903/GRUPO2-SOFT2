@@ -73,4 +73,10 @@ body {
         text-align: center;
         display: inline-block;
     }
+    .LoginBoton:disabled {
+        color: black; 
+        border-color: black;
+        background-color: white; 
+        opacity: 1; 
+    }
 }

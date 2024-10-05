@@ -2,6 +2,7 @@ import '../LoginPage/LoginPage.css';
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; 
+import users from '../../data_json/user.json';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -10,16 +11,21 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+    // Verificar si el usuario y la contraseña son correctos
+    const user = users.find(user => 
+      (user.username === email || user.username === email) && user.password === password
+    );
+
+    if (user) {
+      navigate('/inicio'); // Redirigir si la autenticación es exitosa
+    } else {
+      alert('Usuario o contraseña incorrectos'); // Mensaje de error
+    }
   };
 
   const handleRegister = () => {
     navigate('/register');
-  };
-
-  const handleLogin = () => {
-    navigate('/inicio');
   };
 
   return (
@@ -53,7 +59,7 @@ const LoginPage = () => {
           <Button className="LoginBoton" variant="outlined" onClick={handleRegister}>
             Registro Usuario
           </Button>
-          <Button className="LoginBoton" variant="outlined" onClick={handleLogin}>
+          <Button className="LoginBoton" variant="outlined" type="submit" disabled={!email || !password}>
             Iniciar
           </Button>
         </div>
