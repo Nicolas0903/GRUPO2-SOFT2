@@ -4,13 +4,27 @@
         "name": "Pedro",
         "lastname": "Morales",
         "username": "20203263",
-        "password": "480"
+        "password": "123"
     },
     {
         "id": 2,
-        "name": "",
-        "lastname": "",
-        "username": "",
-        "password": ""
+        "name": "Nicolas",
+        "lastname": "Valdivia",
+        "username": "20181948",
+        "password": "123"
+    },
+    {
+        "id": 3,
+        "name": "Leonardo",
+        "lastname": "Peñafiel",
+        "username": "20194424",
+        "password": "123"
+    },
+    {
+        "id": 4,
+        "name": "Dante",
+        "lastname": "Perales",
+        "username": "20213996",
+        "password": "123"
     }
 ]
