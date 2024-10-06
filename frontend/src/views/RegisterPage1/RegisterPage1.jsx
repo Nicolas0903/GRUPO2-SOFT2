@@ -17,7 +17,7 @@ const RegisterPage1 = () => {
     console.log('Número de Celular:', telefono);
     // Redirigir a la página de inicio o a donde desees
     navigate('/register2');
-  };
+  }; 
 
   return (
     <Container className="ContenedorPrincipalRegistro" maxWidth="xs">
