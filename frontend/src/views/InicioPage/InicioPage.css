@@ -1,54 +1,44 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-}
-
-.ContenedorPrincipalInicio {
-    background-image: url('../../images/carretera.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; 
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    background-color: #1d1d1d;
+    width: 100vw;
+    height: 100vh;
     position: relative;
 }
 
-.Video {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    z-index: 0; /* Asegúrate de que el video esté detrás de otros elementos */
+#video-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.TituloInicio {
-    font-size: 24px; /* Asegúrate de que este tamaño de fuente se aplique */
-    color: white;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
+#controls {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
     margin-top: 20px;
-    font-weight: bold;
 }
 
-.ContenedorInicio-Boton {
-    display: flex; 
-    justify-content: center; 
-    margin-top: auto; /* Empujar hacia la parte inferior */
-    padding: 20px; /* Espaciado adicional */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.BotonInicio {
-    margin-left: 10px; /* Espaciado entre botones */
-    margin-right: 10px; /* Espaciado entre botones */
+button:hover {
+    background-color: #0056b3;
+}
+
+canvas {
+    position: absolute;
 }

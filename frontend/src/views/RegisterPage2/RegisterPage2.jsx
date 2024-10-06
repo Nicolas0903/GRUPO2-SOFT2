@@ -1,4 +1,4 @@
-import '../RegisterPage2/RegisterPage2.css'; // Asegúrate de que este archivo CSS esté en la ubicación correcta
+import '../RegisterPage2/RegisterPage2.css';
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -14,18 +14,15 @@ const RegisterPage2 = () => {
     const handleSubmit = (event) => {
       event.preventDefault();
       
-      // Verificar si las contraseñas coinciden
       if (contrasena !== confirmarContrasena) {
         alert("Las contraseñas no coinciden.");
         return;
       }
   
-      // Aquí puedes agregar la lógica para registrar al usuario
       console.log('Usuario o Correo:', usuario);
       console.log('Contraseña:', contrasena);
-      
-      // Redirigir a la página de inicio o a donde desees
-      navigate('/login');
+    
+      navigate('/');
     };
   
     return (
@@ -61,7 +58,7 @@ const RegisterPage2 = () => {
               endAdornment: (
                 <Button
                   onClick={() => setMostrarContrasena(!mostrarContrasena)}
-                  style={{ textTransform: 'none' }} // Para evitar que el botón cambie el formato
+                  style={{ textTransform: 'none' }}
                 >
                   {mostrarContrasena ? 'Ocultar' : 'Mostrar'}
                 </Button>
@@ -75,14 +72,14 @@ const RegisterPage2 = () => {
             required
             fullWidth
             label="Ingrese nuevamente la contraseña"
-            type={mostrarConfirmarContrasena ? 'text' : 'password'} // Cambia el tipo según el estado
+            type={mostrarConfirmarContrasena ? 'text' : 'password'}
             value={confirmarContrasena}
             onChange={(e) => setConfirmarContrasena(e.target.value)}
             InputProps={{
               endAdornment: (
                 <Button
                   onClick={() => setMostrarConfirmarContrasena(!mostrarConfirmarContrasena)}
-                  style={{ textTransform: 'none' }} // Para evitar que el botón cambie el formato
+                  style={{ textTransform: 'none' }}
                 >
                   {mostrarConfirmarContrasena ? 'Ocultar' : 'Mostrar'}
                 </Button>
