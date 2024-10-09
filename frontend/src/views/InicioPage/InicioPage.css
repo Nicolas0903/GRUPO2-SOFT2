@@ -11,6 +11,19 @@ body {
     position: relative;
 }
 
+.container{
+    background-image: url('../../images/carretera.jpg');
+    background-size: cover; /* Cambia esto a cover para llenar la pantalla */
+    background-position: center;
+    background-repeat: no-repeat; 
+    height: 100vh; /* Mantén la altura al 100% de la ventana */
+    display: flex;
+    flex-direction: column; /* Cambia a columna para alinear elementos verticalmente */
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
 #video-container {
     position: relative;
     display: flex;
@@ -19,24 +32,27 @@ body {
     justify-content: center;
 }
 
-#controls {
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-    margin-top: 20px;
+video {
+    border: 2px solid white; /* Añade un borde blanco para visualizar mejor */
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+.BotonI {
+    background-color: white; 
+    color: black;
+    border: 2px solid white; 
+    border-radius: 30px;
+    padding: 10px 25px;
+    margin: 10px 10px; /* Margen vertical y horizontal para separar los botones */
+    font-size: 13px;
+    font-weight: bold;
     cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s; /* Para transiciones suaves al pasar el cursor */
 }
 
-button:hover {
-    background-color: #0056b3;
+.BotonI:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Efecto al pasar el mouse sobre el botón */
 }
 
 canvas {
