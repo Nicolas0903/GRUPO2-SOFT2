@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as faceapi from 'face-api.js';
-import './InicioPage.css'; // Asegúrate de importar el CSS
+import './InicioPage.css';
 import { Container } from '@mui/material';
 
 const InicioPage = () => {

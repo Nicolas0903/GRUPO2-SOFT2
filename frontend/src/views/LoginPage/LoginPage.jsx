@@ -12,15 +12,14 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Verificar si el usuario y la contraseña son correctos
     const user = users.find(user => 
       (user.username === email || user.username === email) && user.password === password
     );
 
     if (user) {
-      navigate('/inicio'); // Redirigir si la autenticación es exitosa
+      navigate('/inicio');
     } else {
-      alert('Usuario o contraseña incorrectos'); // Mensaje de error
+      alert('Usuario o contraseña incorrectos');
     }
   };
 
