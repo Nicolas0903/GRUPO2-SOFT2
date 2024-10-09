@@ -26,5 +26,19 @@
         "lastname": "Perales",
         "username": "20213996",
         "password": "123"
+    },
+    {
+        "id": 5,
+        "name": "Isaac",
+        "lastname": "Sisniegas",
+        "username": "",
+        "password": ""
+    },
+    {
+        "id": 6,
+        "name": "Joaquin",
+        "lastname": "Bernales",
+        "username": "",
+        "password": ""
     }
 ]
