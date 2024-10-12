@@ -66,7 +66,7 @@ const InicioPage = () => {
 
     const exportToCSV = () => {
         const csvContent = "data:text/csv;charset=utf-8,"
-            + ["Emoción", "Confianza"].join(",") + "\n" // Encabezados
+            + ["Emocion", "Confianza"].join(",") + "\n" // Encabezados
             + emotionData.map(emotion => {
                 // Convertir cada emoción a CSV
                 return Object.entries(emotion).map(([key, value]) => `${key}:${value}`).join(",");
