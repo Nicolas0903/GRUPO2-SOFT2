@@ -46,7 +46,7 @@
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Función que permite añadir un marcador y listar las coordenadas
+        // Función para añadir un marcador y listar las coordenadas
         map.on('click', function(e) {
             var latlng = e.latlng;
             var marker = L.marker(latlng).addTo(map);
