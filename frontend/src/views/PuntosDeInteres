@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntos de Interés</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px;
+            background-color: #f2f2f2;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Puntos de Interés</h1>
+    <p>Haz clic en el mapa para seleccionar puntos de destino.</p>
+    <div id="map"></div>
+    <h2>Puntos Seleccionados:</h2>
+    <ul id="selected-points">
+        <!-- Lista de puntos seleccionados aparecerá aquí -->
+    </ul>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Inicializar el mapa centrado en Lima, Perú
+        var map = L.map('map').setView([-12.0464, -77.0428], 13);
+
+        // Cargar mapa desde OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Función que permite añadir un marcador y listar las coordenadas
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+            var marker = L.marker(latlng).addTo(map);
+
+            // Agregar las coordenadas a la lista de puntos seleccionados
+            var pointList = document.getElementById('selected-points');
+            var listItem = document.createElement('li');
+            listItem.textContent = `Latitud: ${latlng.lat.toFixed(4)}, Longitud: ${latlng.lng.toFixed(4)}`;
+            pointList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
