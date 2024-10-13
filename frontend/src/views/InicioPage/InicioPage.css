@@ -60,38 +60,38 @@ canvas {
 }
 
 .ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0.9) !important; /* Más oscuro */
+    background-color: rgba(0, 0, 0, 0.9) !important; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .ReactModal__Content {
-    background-color: #111; /* Fondo mucho más oscuro */
-    color: #e0e0e0; /* Color del texto principal */
+    background-color: #111; 
+    color: #e0e0e0;
     border-radius: 10px;
     padding: 20px;
     width: 80%;
     max-width: 600px;
     position: relative;
     text-align: center;
-    border: 2px solid #333; /* Borde oscuro */
+    border: 2px solid #333; 
 }
 
 .ReactModal__Content h2 {
-    color: #888; /* Títulos más oscuros que el cuerpo */
+    color: #888; 
     margin-bottom: 15px;
 }
 
 .ReactModal__Content p {
-    color: #ccc; /* Cuerpo del texto más claro que los títulos */
+    color: #ccc; 
     margin-bottom: 20px;
 }
 
 .BotonCerrar {
-    background-color: #222; /* Fondo más oscuro */
-    color: #e0e0e0; /* Texto claro */
-    border: 2px solid #444; /* Borde oscuro */
+    background-color: #222; 
+    color: #e0e0e0; 
+    border: 2px solid #444;
     border-radius: 30px;
     padding: 10px 25px;
     font-size: 13px;
@@ -101,6 +101,6 @@ canvas {
 }
 
 .BotonCerrar:hover {
-    background-color: rgba(34, 34, 34, 0.8); /* Fondo más oscuro al pasar el mouse */
+    background-color: rgba(34, 34, 34, 0.8);
 }
 
