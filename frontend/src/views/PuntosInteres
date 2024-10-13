@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntos de Interés</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecciona los puntos de destino</h1>
+    <div id="map"></div>
+    <ul id="selected-points">
+        <!-- Lista de puntos seleccionados -->
+    </ul>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Inicializar el mapa
+        var map = L.map('map').setView([-12.0464, -77.0428], 13); // Coordenadas de Lima como ejemplo
+
+        // Cargar el mapa con OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Función para agregar puntos de interés
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+            var marker = L.marker(latlng).addTo(map);
+
+            // Agregar el punto seleccionado a la lista
+            var pointList = document.getElementById('selected-points');
+            var listItem = document.createElement('li');
+            listItem.textContent = `Punto: ${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)}`;
+            pointList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
