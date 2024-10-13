@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Emociones</title>
+</head>
+<body>
+    <h1>Detección de Emociones</h1>
+    <p>La cámara detectará emociones faciales.</p>
+    <video id="video" width="720" height="560" autoplay muted></video>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <script>
+        const negativeEmotions = ['molesto', 'triste', 'disgustado', 'asustado'];
+        const video = document.getElementById('video');
+        let allowMapClick = false;
+
+        async function setupCameraAndDetectEmotions() {
+            // Cargar los modelos de face-api.js
+            await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+            await faceapi.nets.faceExpressionNet.loadFromUri('/models');
+
+            // Acceder a la cámara
+            navigator.mediaDevices.getUserMedia({ video: {} }).then((stream) => {
+                video.srcObject = stream;
+            });
+
+            // Detectar emociones cada segundo
+            video.addEventListener('play', () => {
+                setInterval(async () => {
+                    const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions();
+                    if (detections.length > 0) {
+                        const expressions = detections[0].expressions;
+                        const detectedEmotion = Object.keys(expressions).reduce((a, b) => expressions[a] > expressions[b] ? a : b);
+
+                        if (negativeEmotions.includes(detectedEmotion)) {
+                            allowMapClick = true;
+                            console.log(`Emoción negativa detectada: ${detectedEmotion}`);
+                        } else {
+                            allowMapClick = false;
+                            console.log(`Emoción positiva detectada: ${detectedEmotion}`);
+                        }
+                    }
+                }, 1000);
+            });
+        }
+
+        // Inicializar detección de emociones
+        setupCameraAndDetectEmotions();
+    </script>
+</body>
+</html>
