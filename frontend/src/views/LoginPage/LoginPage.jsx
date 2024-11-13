@@ -1,19 +1,29 @@
+// LoginPage.js
 import '../LoginPage/LoginPage.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; 
-import users from '../../data_json/user.json';
+import { useNavigate } from 'react-router-dom';
+import initialUsers from '../../data_json/user.json'; // archivo inicial de usuarios
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Cargar `user.json` en `localStorage` al inicio si no hay datos
+  useEffect(() => {
+    const storedUsers = JSON.parse(localStorage.getItem('users'));
+    if (!storedUsers) {
+      localStorage.setItem('users', JSON.stringify(initialUsers));
+    }
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = users.find(user => 
-      (user.username === email || user.username === email) && user.password === password
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(
+      (user) => (user.username === email || user.username === email) && user.password === password
     );
 
     if (user) {
