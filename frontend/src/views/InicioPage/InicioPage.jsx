@@ -4,22 +4,64 @@ import './InicioPage.css';
 import { Container } from '@mui/material';
 import Modal from 'react-modal';
 
+export const downloadFile = (content, filename) => {
+    console.log(`downloadFile called with content: ${content}, filename: ${filename}`);
+    const encodedUri = encodeURI(content);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
+
+export const exportToCSV = (emotionData, downloadFileFunc) => {
+    const csvContent = "data:text/csv;charset=utf-8,"
+        + ["Emocion,Confianza"].join(",") + "\n"
+        + emotionData.map(emotion => {
+            return Object.entries(emotion)
+                .map(([key, value]) => `${key}:${value}`)
+                .join(",");
+        }).join("\n");
+
+    downloadFileFunc(csvContent, "emotion_data.csv");
+};
+
+export const exportToJSON = (emotionData, downloadFileFunc) => {
+    const jsonContent = "data:text/json;charset=utf-8,"
+        + JSON.stringify(emotionData, null, 2);
+
+    downloadFileFunc(jsonContent, "emotion_data.json");
+};
+
+export const exportToTXT = (emotionData, downloadFileFunc) => {
+    const txtContent = "data:text/plain;charset=utf-8,"
+        + emotionData.map(emotion => {
+            return Object.entries(emotion)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join("\n");
+        }).join("\n\n");
+
+    downloadFileFunc(txtContent, "emotion_data.txt");
+};
+
 const InicioPage = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
-    const [emotionData, setEmotionData] = useState([]); // Estado para almacenar los datos de emociones
-    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del popup
-    const [videoStatus, setVideoStatus] = useState("Detenido"); // Estado del video (Reproduciendo / Detenido)
-    const [deteccionesRealizadas, setDeteccionesRealizadas] = useState(0); // Contador de detecciones realizadas
-    const [isTracking, setIsTracking] = useState(false); // Estado para indicar si el seguimiento está activo
-    const intervalIdRef = useRef(null); // Usar useRef para almacenar el ID del intervalo
+    const [emotionData, setEmotionData] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [videoStatus, setVideoStatus] = useState("Detenido");
+    const [deteccionesRealizadas, setDeteccionesRealizadas] = useState(0);
+    const [isTracking, setIsTracking] = useState(false);
+    const [selectedFormat, setSelectedFormat] = useState("csv");
+    const intervalIdRef = useRef(null);
 
     useEffect(() => {
         const loadModels = async () => {
             const MODEL_URL = process.env.PUBLIC_URL + '/models'; 
             await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
             await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
-            await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL); // Carga el modelo de expresiones
+            await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL);
             startVideo();
         };
 
@@ -35,18 +77,18 @@ const InicioPage = () => {
     }, []);
 
     const iniciarSeguimiento = async () => {
-        if (isTracking) return; // Evitar múltiples inicios de seguimiento
+        if (isTracking) return;
 
-        setIsTracking(true); // Marcar el seguimiento como activo
+        setIsTracking(true);
         const video = videoRef.current;
         const canvas = canvasRef.current;
         faceapi.matchDimensions(canvas, { width: video.width, height: video.height });
 
         video.play();
-        setVideoStatus("Reproduciendo"); // Actualizar el estado del video
-        setDeteccionesRealizadas(0); // Reiniciar el contador de detecciones
+        setVideoStatus("Reproduciendo");
+        setDeteccionesRealizadas(0);
 
-        const emotionResults = []; // Array para almacenar los resultados de emociones
+        const emotionResults = [];
 
         intervalIdRef.current = setInterval(async () => {
             const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
@@ -57,54 +99,46 @@ const InicioPage = () => {
             faceapi.draw.drawDetections(canvas, resizedDetections);
             faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
 
-            // Guardar las emociones detectadas
             resizedDetections.forEach(detection => {
-                const expressions = detection.expressions; // Obtener las expresiones
-                emotionResults.push(expressions); // Agregar las emociones al array
+                const expressions = detection.expressions;
+                emotionResults.push(expressions);
             });
 
-            setEmotionData([...emotionResults]); // Actualizar el estado con los nuevos datos
-            setDeteccionesRealizadas(prev => prev + resizedDetections.length); // Aumentar el conteo de detecciones
-        }, 100); // Intervalo de 100 ms
+            setEmotionData([...emotionResults]);
+            setDeteccionesRealizadas(prev => prev + resizedDetections.length);
+        }, 100);
     };
 
     const detenerSeguimiento = () => {
-        if (!isTracking) return; // Evitar detener si no hay un seguimiento activo
+        if (!isTracking) return;
 
-        setIsTracking(false); // Marcar el seguimiento como inactivo
+        setIsTracking(false);
         const video = videoRef.current;
-        video.pause(); // Detener el video
-        setVideoStatus("Detenido"); // Actualizar el estado del video
+        video.pause();
+        setVideoStatus("Detenido");
 
-        // Detener el intervalo de detección
         clearInterval(intervalIdRef.current);
-        intervalIdRef.current = null; // Limpiar el ID del intervalo
+        intervalIdRef.current = null;
     };
 
-    const exportToCSV = () => {
-        const csvContent = "data:text/csv;charset=utf-8,"
-            + ["Emocion", "Confianza"].join(",") + "\n" // Encabezados
-            + emotionData.map(emotion => {
-                return Object.entries(emotion).map(([key, value]) => `${key}:${value}`).join(",");
-            }).join("\n");
-
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "emotion_data.csv");
-        document.body.appendChild(link); // Required for FF
-
-        link.click(); // Simular clic en el enlace para descargar
-        document.body.removeChild(link); // Limpiar el enlace del DOM
+    const handleDownload = () => {
+        switch (selectedFormat) {
+            case "csv":
+                exportToCSV(emotionData, downloadFile);
+                break;
+            case "json":
+                exportToJSON(emotionData, downloadFile);
+                break;
+            case "txt":
+                exportToTXT(emotionData, downloadFile);
+                break;
+            default:
+                console.error("Formato no soportado.");
+        }
     };
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
 
     return (
         <Container className="container" maxWidth="xs">
@@ -117,8 +151,20 @@ const InicioPage = () => {
                 <h2>Estado del Sistema</h2>
                 <p>Estado del Video: {videoStatus}</p>
                 <p>Detecciones Realizadas: {deteccionesRealizadas}</p>
-                <h2>Viajes</h2>
-                <p>Aquí se mostrarán los viajes...</p>
+                <h2>Exportar Datos</h2>
+                <div>
+                    <label htmlFor="format-select">Seleccionar formato: </label>
+                    <select
+                        id="format-select"
+                        value={selectedFormat}
+                        onChange={(e) => setSelectedFormat(e.target.value)}
+                    >
+                        <option value="csv">CSV</option>
+                        <option value="json">JSON</option>
+                        <option value="txt">TXT</option>
+                    </select>
+                </div>
+                <button className='BotonI' onClick={handleDownload}>Descargar Datos</button>
                 <button className='BotonCerrar' onClick={closeModal}>Cerrar</button>
             </Modal>
 
