@@ -11,3 +11,14 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+  // Llamada al backend
+  fetch('http://localhost:3000/api/data') 
+    .then((response) => response.json())
+    .then((data) => {
+      setData(data);
+    })
+    .catch((error) => {
+      console.error('Error al conectar con el backend:', error);
+    });
+}, []);
