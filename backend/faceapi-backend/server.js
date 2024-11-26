@@ -6,12 +6,10 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-// Middleware CORS para permitir solicitudes desde otros orígenes
-app.use(cors()); // Permite solicitudes de cualquier origen
-// Si deseas limitar el origen, puedes configurarlo así:
+
+app.use(cors()); 
 // app.use(cors({ origin: 'http://localhost:8080' }));
 
-// Middleware para analizar solicitudes JSON
 app.use(bodyParser.json());
 
 // Conectar a la base de datos SQLite
